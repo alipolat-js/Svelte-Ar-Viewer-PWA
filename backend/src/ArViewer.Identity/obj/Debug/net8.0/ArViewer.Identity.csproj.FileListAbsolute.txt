@@ -1,0 +1,12 @@
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\bin\Debug\net8.0\ArViewer.Identity.deps.json
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\bin\Debug\net8.0\ArViewer.Identity.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\bin\Debug\net8.0\ArViewer.Identity.pdb
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.AssemblyInfoInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.AssemblyInfo.cs
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.sourcelink.json
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\refint\ArViewer.Identity.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ArViewer.Identity.pdb
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Identity\obj\Debug\net8.0\ref\ArViewer.Identity.dll

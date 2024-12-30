@@ -1,0 +1,6 @@
+@ArViewer.API_HostAddress = http://localhost:5201
+
+GET {{ArViewer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,13 @@
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.AssemblyInfoInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.AssemblyInfo.cs
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.sourcelink.json
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\bin\Debug\net8.0\ArViewer.Core.deps.json
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\bin\Debug\net8.0\ArViewer.Core.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\bin\Debug\net8.0\ArViewer.Core.pdb
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.csproj.AssemblyReference.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\refint\ArViewer.Core.dll
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ArViewer.Core.pdb
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Core\obj\Debug\net8.0\ref\ArViewer.Core.dll
