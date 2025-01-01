@@ -4,6 +4,7 @@
   import { page } from '$app/stores';
   import { authService } from '$lib/services/auth';
   import { ROUTES } from '$lib/config';
+  import ErrorAlert from '$lib/components/ui/ErrorAlert.svelte';
 
   let email = '';
   let password = '';
@@ -29,6 +30,10 @@
       loading = false;
     }
   }
+
+  function clearError() {
+    error = '';
+  }
 </script>
 
 <div class="min-h-screen flex">
@@ -45,15 +50,13 @@
   <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
     <div class="max-w-md w-full">
       <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold">Sign In</h2>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Sign In</h2>
         <p class="text-gray-600 dark:text-gray-400 mt-2">Enter your credentials to access your account</p>
       </div>
 
       <form on:submit|preventDefault={handleLogin} class="space-y-6">
         {#if error}
-          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
-            <span class="block sm:inline">{error}</span>
-          </div>
+          <ErrorAlert message={error} dismissible={true} onDismiss={clearError} />
         {/if}
 
         <div>
@@ -63,7 +66,7 @@
             id="email"
             bind:value={email}
             required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
             placeholder="Enter your email"
           />
         </div>
@@ -75,7 +78,7 @@
             id="password"
             bind:value={password}
             required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
             placeholder="Enter your password"
           />
         </div>
@@ -83,7 +86,7 @@
         <button
           type="submit"
           disabled={loading}
-          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 dark:focus:ring-offset-gray-900"
         >
           {#if loading}
             <span class="inline-flex items-center">

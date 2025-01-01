@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArViewer.Identity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b2aa6b6480441aea3eb18b9c58591d58a0fc016")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cad9fe55d6a5b7d5ca6c3ae926cff86473c85bd0")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArViewer.Identity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArViewer.Identity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

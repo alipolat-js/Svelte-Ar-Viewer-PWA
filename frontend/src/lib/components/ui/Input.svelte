@@ -12,6 +12,10 @@
     email: 'M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207',
     password: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'
   };
+
+  $: inputClasses = `block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 ${
+    icon ? 'pl-10' : ''
+  } text-gray-900 placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-500`;
 </script>
 
 <div class="relative">
@@ -24,7 +28,7 @@
     {type}
     {required}
     bind:value
-    class="block w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 pl-10 text-gray-900 placeholder-gray-500 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100 dark:placeholder-gray-500 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+    class={inputClasses}
     {placeholder}
   />
   {#if icon && iconPaths[icon]}

@@ -9,14 +9,28 @@ A Progressive Web Application for immersive AR experiences built with Svelte and
 - Responsive design
 - Admin dashboard for model management
 - User authentication system
+- Dark/Light theme support
+- Role-based access control
+- Real-time statistics
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Svelte, TypeScript, TailwindCSS
+### Frontend
+- **Framework**: Svelte, SvelteKit
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
 - **3D Rendering**: Three.js
 - **AR**: WebXR
-- **Styling**: TailwindCSS
+- **State Management**: Svelte stores
 - **Build Tool**: Vite
+
+### Backend
+- **Framework**: ASP.NET Core 8
+- **Language**: C#
+- **Database**: SQL Server
+- **ORM**: Entity Framework Core
+- **Authentication**: JWT
+- **API Documentation**: Swagger/OpenAPI
 
 ## 🚀 Getting Started
 
@@ -26,21 +40,31 @@ A Progressive Web Application for immersive AR experiences built with Svelte and
    cd Svelte-Ar-Viewer-PWA
    ```
 
-2. Install dependencies:
+2. Set up the backend:
+   ```bash
+   cd backend/src/ArViewer.API
+   dotnet restore
+   dotnet run
+   ```
+   The API will be available at `https://localhost:7203`
+
+3. Set up the frontend:
    ```bash
    cd frontend
    npm install
-   ```
-
-3. Start development server:
-   ```bash
    npm run dev
    ```
+   The app will be available at `http://localhost:5173`
 
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+4. Access the admin dashboard:
+   - URL: `http://localhost:5173/admin`
+   - Default admin credentials:
+     - Email: `admin@arviewer.com`
+     - Password: `Password123!`
+
+## 📁 Project Structure
+
+See [project-structure.md](docs/project-structure.md) for detailed information about the project organization.
 
 ## 🌿 Branch Structure
 
@@ -52,9 +76,21 @@ A Progressive Web Application for immersive AR experiences built with Svelte and
 
 See [branching-strategy.md](docs/branching-strategy.md) for more details.
 
-## 📝 License
+## 📝 Documentation
 
-MIT License - see the [LICENSE](LICENSE) file for details.
+- [Project Development Report](docs/pdr.md)
+- [API Documentation](https://localhost:7203/swagger)
+- [Project Structure](docs/project-structure.md)
+- [Branching Strategy](docs/branching-strategy.md)
+
+## 🔒 Security
+
+- JWT-based authentication
+- Role-based access control
+- Secure password hashing
+- HTTPS enforcement
+- XSS protection
+- CORS configuration
 
 ## 👥 Contributing
 
@@ -63,3 +99,7 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 3. Commit your changes (`git commit -m 'feat: Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## 📝 License
+
+MIT License - see the [LICENSE](LICENSE) file for details.

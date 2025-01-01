@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { APP_TAGLINE, ROUTES } from '$lib/constants/app';
+	import { AUTH_CONFIG } from '$lib/config';
+	import { authService } from '$lib/services/auth';
 	import Logo from '$lib/components/ui/Logo.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -15,10 +18,32 @@
 		try {
 			isLoading = true;
 			error = '';
-			await new Promise(resolve => setTimeout(resolve, 1000));
-			goto(ROUTES.VIEWER);
+			
+			const response = await authService.login(email, password);
+			
+			if (response.success) {
+				localStorage.setItem(AUTH_CONFIG.tokenKey, response.token);
+				localStorage.setItem(AUTH_CONFIG.refreshTokenKey, response.refreshToken);
+				localStorage.setItem(AUTH_CONFIG.userKey, JSON.stringify({
+					id: response.userId,
+					userName: response.userName,
+					roles: response.roles
+				}));
+
+				const nextUrl = $page.url.searchParams.get('next');
+				if (nextUrl) {
+					goto(decodeURIComponent(nextUrl));
+				} else if (response.roles.includes('Admin')) {
+					goto('/admin');
+				} else {
+					goto('/viewer');
+				}
+			} else {
+				error = response.message || 'Invalid credentials';
+			}
 		} catch (err) {
-			error = 'Invalid credentials';
+			console.error('Login error:', err);
+			error = err instanceof Error ? err.message : 'Failed to login';
 		} finally {
 			isLoading = false;
 		}

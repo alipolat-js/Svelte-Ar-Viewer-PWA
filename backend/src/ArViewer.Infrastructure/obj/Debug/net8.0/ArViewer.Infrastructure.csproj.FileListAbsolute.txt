@@ -1,3 +1,4 @@
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Infrastructure\bin\Debug\net8.0\appsettings.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Infrastructure\bin\Debug\net8.0\ArViewer.Infrastructure.deps.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Infrastructure\bin\Debug\net8.0\ArViewer.Infrastructure.runtimeconfig.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.Infrastructure\bin\Debug\net8.0\ArViewer.Infrastructure.dll

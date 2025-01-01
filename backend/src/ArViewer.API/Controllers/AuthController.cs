@@ -3,108 +3,184 @@ using ArViewer.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.Extensions.Logging;
 
 namespace ArViewer.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, ILogger<AuthController> logger)
     {
         _authService = authService;
-    }
-
-    [HttpGet("users")]
-    [Authorize(Roles = "Admin")]
-    public async Task<ActionResult<IEnumerable<UserProfileResponse>>> GetUsers()
-    {
-        var users = await _authService.GetUsersAsync();
-        return Ok(users);
+        _logger = logger;
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<AuthResponse>> Login([FromBody] LoginRequest request)
+    public async Task<ActionResult<AuthResponse>> LoginAsync([FromBody] LoginRequest request)
     {
-        var response = await _authService.LoginAsync(request);
-        if (!response.Success)
+        try
         {
-            return BadRequest(response);
+            var response = await _authService.LoginAsync(request);
+            return Ok(response);
         }
-
-        return Ok(response);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during login attempt");
+            return BadRequest(new AuthResponse { Success = false, Message = "Invalid email or password" });
+        }
     }
 
     [HttpPost("refresh-token")]
-    public async Task<ActionResult<AuthResponse>> RefreshToken([FromBody] RefreshTokenRequest request)
+    public async Task<ActionResult<AuthResponse>> RefreshTokenAsync([FromBody] RefreshTokenRequest request)
     {
-        var response = await _authService.RefreshTokenAsync(request.RefreshToken);
-        if (!response.Success)
+        try
         {
-            return BadRequest(response);
+            var response = await _authService.RefreshTokenAsync(request.RefreshToken);
+            return Ok(response);
         }
-
-        return Ok(response);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during token refresh");
+            return BadRequest(new AuthResponse { Success = false, Message = "Invalid refresh token" });
+        }
     }
 
     [HttpPost("revoke-token")]
     [Authorize]
-    public async Task<ActionResult> RevokeToken()
+    public async Task<IActionResult> RevokeTokenAsync([FromBody] RevokeTokenRequest request)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (string.IsNullOrEmpty(userId))
+        try
         {
-            return BadRequest(new { message = "Invalid token" });
+            await _authService.RevokeTokenAsync(request.RefreshToken);
+            return Ok();
         }
-
-        var success = await _authService.RevokeTokenAsync(userId);
-        if (!success)
+        catch (Exception ex)
         {
-            return BadRequest(new { message = "Failed to revoke token" });
+            _logger.LogError(ex, "Error during token revocation");
+            return BadRequest(new { Message = "Invalid token" });
         }
-
-        return Ok(new { message = "Token revoked successfully" });
     }
 
-    [HttpPost("users")]
+    [HttpGet("users")]
     [Authorize(Roles = "Admin")]
-    public async Task<ActionResult<AuthResponse>> CreateUser([FromBody] CreateUserRequest request)
+    public async Task<ActionResult<IEnumerable<UserProfileResponse>>> GetUsersAsync()
     {
-        var response = await _authService.CreateUserAsync(
-            request.Email,
-            request.Password,
-            request.FirstName,
-            request.LastName,
-            request.Roles
-        );
-
-        if (!response.Success)
+        try
         {
-            return BadRequest(response);
+            var users = await _authService.GetUsersAsync();
+            return Ok(users);
         }
-
-        return Ok(response);
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching users");
+            return StatusCode(500, new { Message = "An error occurred while fetching users" });
+        }
     }
 
-    [HttpGet("me")]
-    [Authorize]
-    public async Task<ActionResult<UserProfileResponse>> GetProfile()
+    [HttpPost("users/{userId}/deactivate")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeactivateUserAsync(string userId)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (string.IsNullOrEmpty(userId))
+        try
         {
-            return BadRequest(new { message = "Invalid token" });
+            await _authService.DeactivateUserAsync(userId);
+            return Ok();
         }
-
-        var user = await _authService.GetUserProfileAsync(userId);
-        if (user == null)
+        catch (Exception ex)
         {
-            return NotFound(new { message = "User not found" });
+            _logger.LogError(ex, "Error deactivating user");
+            return StatusCode(500, new { Message = "An error occurred while deactivating the user" });
         }
+    }
 
-        return Ok(user);
+    [HttpPost("users/{userId}/reactivate")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> ReactivateUserAsync(string userId)
+    {
+        try
+        {
+            await _authService.ReactivateUserAsync(userId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error reactivating user");
+            return StatusCode(500, new { Message = "An error occurred while reactivating the user" });
+        }
+    }
+
+    [HttpPut("users/{userId}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult<AuthResponse>> UpdateUserAsync(string userId, [FromBody] UpdateUserRequest request)
+    {
+        try
+        {
+            var response = await _authService.UpdateUserAsync(userId, request.FirstName, request.LastName, request.Email, request.Roles);
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating user");
+            return StatusCode(500, new { Message = "An error occurred while updating the user" });
+        }
+    }
+
+    [HttpDelete("users/{userId}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> DeleteUserAsync(string userId)
+    {
+        try
+        {
+            await _authService.SoftDeleteUserAsync(userId);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error deleting user");
+            return StatusCode(500, new { Message = "An error occurred while deleting the user" });
+        }
+    }
+
+    [HttpPost("register")]
+    public async Task<ActionResult<AuthResponse>> RegisterAsync([FromBody] CreateUserRequest request)
+    {
+        try
+        {
+            if (request.Roles == null || !request.Roles.Any())
+            {
+                request.Roles = new List<string> { "User" }; // Default role
+            }
+
+            var response = await _authService.CreateUserAsync(
+                request.Email,
+                request.Password,
+                request.FirstName,
+                request.LastName,
+                request.Roles
+            );
+
+            if (!response.Success)
+            {
+                _logger.LogWarning("User registration failed: {Message}", response.Message);
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error during user registration");
+            return BadRequest(new AuthResponse { Success = false, Message = $"Registration failed: {ex.Message}" });
+        }
     }
 }
 
@@ -120,4 +196,17 @@ public class CreateUserRequest
 public class RefreshTokenRequest
 {
     public string RefreshToken { get; set; }
+}
+
+public class RevokeTokenRequest
+{
+    public string RefreshToken { get; set; }
+}
+
+public class UpdateUserRequest
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public IList<string> Roles { get; set; } = new List<string>();
 } 

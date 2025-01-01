@@ -1,3 +1,11 @@
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.csproj.AssemblyReference.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.AssemblyInfoInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.AssemblyInfo.cs
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.csproj.CoreCompileInputs.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.sourcelink.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\appsettings.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\ArViewer.API.exe
@@ -10,7 +18,6 @@ C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArV
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Humanizer.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -120,14 +127,6 @@ C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArV
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\ArViewer.Infrastructure.dll
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\ArViewer.Core.pdb
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\bin\Debug\net8.0\ArViewer.Infrastructure.pdb
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.csproj.AssemblyReference.cache
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.AssemblyInfoInputs.cache
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.AssemblyInfo.cs
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.csproj.CoreCompileInputs.cache
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\ArViewer.API.sourcelink.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\lenovo\Desktop\Workspaces\Projects\Svelte-Ar-Viewer-PWA\backend\src\ArViewer.API\obj\Debug\net8.0\staticwebassets\msbuild.ArViewer.API.Microsoft.AspNetCore.StaticWebAssets.props

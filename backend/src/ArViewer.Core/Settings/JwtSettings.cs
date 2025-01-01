@@ -2,8 +2,9 @@ namespace ArViewer.Core.Settings;
 
 public class JwtSettings
 {
-    public string SecretKey { get; set; }
-    public string Issuer { get; set; }
-    public string Audience { get; set; }
-    public int ExpiryInMinutes { get; set; }
+    public string Secret { get; set; } = string.Empty;
+    public string ValidIssuer { get; set; } = string.Empty;
+    public string ValidAudience { get; set; } = string.Empty;
+    public int TokenExpirationInMinutes { get; set; } = 60;
+    public int RefreshTokenExpirationInDays { get; set; } = 7;
 } 

@@ -1,4 +1,4 @@
-using ArViewer.Core.Entities;
+using ArViewer.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +21,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.LastName).HasMaxLength(100);
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.IsActive).HasDefaultValue(true);
+            entity.Property(e => e.RefreshToken).HasMaxLength(256);
+            entity.Property(e => e.RefreshTokenExpiryTime).IsRequired(false);
         });
     }
 } 

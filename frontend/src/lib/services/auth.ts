@@ -1,100 +1,199 @@
-import { API_URL } from '$lib/config';
-import { authStore, type User } from '$lib/stores/auth';
+import { API_URL, AUTH_CONFIG } from '$lib/config';
+import type { LoginResponse, User, UserProfileResponse } from '$lib/types';
 
-export interface AuthResponse {
-    success: boolean;
-    message: string | null;
-    token: string;
-    refreshToken: string;
-    userId: string;
-    userName: string;
-    roles: string[];
+interface CreateUserRequest {
+	email: string;
+	password: string;
+	firstName: string;
+	lastName: string;
+	roles: string[];
+}
+
+interface CreateUserResponse {
+	success: boolean;
+	message?: string;
+	user?: User;
 }
 
 class AuthService {
-    private baseUrl = `${API_URL}/api/auth`;
+	private baseUrl = `${API_URL}/api/auth`;
 
-    async login(email: string, password: string): Promise<AuthResponse> {
-        const response = await fetch(`${this.baseUrl}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
+	isAuthenticated(): boolean {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		return !!token;
+	}
 
-        const data: AuthResponse = await response.json();
+	hasRole(role: string): boolean {
+		try {
+			const userData = localStorage.getItem(AUTH_CONFIG.userKey);
+			if (!userData) return false;
+			
+			const user = JSON.parse(userData);
+			return user.roles?.includes(role) || false;
+		} catch {
+			return false;
+		}
+	}
 
-        if (data.success) {
-            const user: User = {
-                userId: data.userId,
-                userName: data.userName,
-                roles: data.roles
-            };
-            authStore.setAuth(data.token, data.refreshToken, user);
-        }
+	getUserData(): { id: string; userName: string; roles: string[] } | null {
+		try {
+			const userData = localStorage.getItem(AUTH_CONFIG.userKey);
+			return userData ? JSON.parse(userData) : null;
+		} catch {
+			return null;
+		}
+	}
 
-        return data;
-    }
+	async login(email: string, password: string): Promise<LoginResponse> {
+		const response = await fetch(`${this.baseUrl}/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ email, password }),
+		});
 
-    async refreshToken(refreshToken: string): Promise<AuthResponse> {
-        const response = await fetch(`${this.baseUrl}/refresh-token`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ refreshToken }),
-        });
+		if (!response.ok) {
+			const error = await response.json();
+			throw new Error(error.message || 'Failed to login');
+		}
 
-        const data: AuthResponse = await response.json();
+		return response.json();
+	}
 
-        if (data.success) {
-            authStore.updateToken(data.token, data.refreshToken);
-        }
+	async createUser(data: CreateUserRequest): Promise<CreateUserResponse> {
+		try {
+			const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+			if (!token) {
+				return { success: false, message: 'Not authenticated' };
+			}
 
-        return data;
-    }
+			const response = await fetch(`${this.baseUrl}/register`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${token}`,
+					},
+					body: JSON.stringify(data),
+				});
 
-    async logout(): Promise<void> {
-        const token = this.getToken();
-        if (token) {
-            try {
-                await fetch(`${this.baseUrl}/revoke-token`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    },
-                });
-            } catch (error) {
-                console.error('Error revoking token:', error);
-            }
-        }
-        authStore.clearAuth();
-    }
+			if (!response.ok) {
+				const error = await response.json();
+				return { success: false, message: error.message || 'Failed to create user' };
+			}
 
-    getToken(): string | null {
-        let token: string | null = null;
-        authStore.subscribe(state => {
-            token = state.token;
-        })();
-        return token;
-    }
+			const user = await response.json();
+			return { success: true, user };
+		} catch (error) {
+			console.error('Error creating user:', error);
+			return { success: false, message: 'An error occurred while creating the user' };
+		}
+	}
 
-    isAuthenticated(): boolean {
-        let isAuthenticated = false;
-        authStore.subscribe(state => {
-            isAuthenticated = state.isAuthenticated;
-        })();
-        return isAuthenticated;
-    }
+	async getUsers(): Promise<UserProfileResponse[]> {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		if (!token) {
+			throw new Error('Not authenticated');
+		}
 
-    hasRole(role: string): boolean {
-        let hasRole = false;
-        authStore.subscribe(state => {
-            hasRole = state.user?.roles.includes(role) || false;
-        })();
-        return hasRole;
-    }
+		const response = await fetch(`${this.baseUrl}/users`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to fetch users');
+		}
+
+		return response.json();
+	}
+
+	async deactivateUser(userId: string): Promise<void> {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		if (!token) {
+			throw new Error('Not authenticated');
+		}
+
+		const response = await fetch(`${this.baseUrl}/users/${userId}/deactivate`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to deactivate user');
+		}
+	}
+
+	async reactivateUser(userId: string): Promise<void> {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		if (!token) {
+			throw new Error('Not authenticated');
+		}
+
+		const response = await fetch(`${this.baseUrl}/users/${userId}/reactivate`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to reactivate user');
+		}
+	}
+
+	async updateUser(userId: string, data: { firstName: string; lastName: string; email: string; roles: string[] }): Promise<void> {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		if (!token) {
+			throw new Error('Not authenticated');
+		}
+
+		const response = await fetch(`${this.baseUrl}/users/${userId}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+			body: JSON.stringify(data),
+		});
+
+		if (!response.ok) {
+			const error = await response.json();
+			throw new Error(error.message || 'Failed to update user');
+		}
+	}
+
+	async deleteUser(userId: string): Promise<void> {
+		const token = localStorage.getItem(AUTH_CONFIG.tokenKey);
+		if (!token) {
+			throw new Error('Not authenticated');
+		}
+
+		const response = await fetch(`${this.baseUrl}/users/${userId}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Failed to delete user');
+		}
+	}
+
+	logout(): void {
+		localStorage.removeItem(AUTH_CONFIG.tokenKey);
+		localStorage.removeItem(AUTH_CONFIG.refreshTokenKey);
+		localStorage.removeItem(AUTH_CONFIG.userKey);
+	}
 }
 
 export const authService = new AuthService(); 
